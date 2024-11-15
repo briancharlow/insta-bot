@@ -4,14 +4,16 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 4000;
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
-})
 
 const { IgApiClient } = require('instagram-private-api');
 const { get } = require('request-promise');
 const CronJob = require("cron").CronJob;
 
+
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
+})
 const postToInsta = async () => {
     const ig = new IgApiClient();
     ig.state.generateDevice(process.env.IG_USERNAME);
@@ -28,7 +30,7 @@ const postToInsta = async () => {
     });
 }
 
-const cronInsta = new CronJob("30 5 * * *", async () => {
+const cronInsta = new CronJob("* * * * *", async () => {
     postToInsta();
 });
 
