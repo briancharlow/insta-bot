@@ -18,12 +18,15 @@ const postToInsta = async () => {
     });
 }
 
-module.exports = async (req, res) => {
-    try {
-        await postToInsta();
-        res.status(200).send('Post made successfully!');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error posting to Instagram');
+module.exports = {
+    postToInsta, // Export the function
+    handler: async (req, res) => {
+        try {
+            await postToInsta();
+            res.status(200).send('Post made successfully!');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error posting to Instagram');
+        }
     }
 };
